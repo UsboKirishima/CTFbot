@@ -10,3 +10,5 @@ export const Emotes = {
   upvote: "upvote:1109734066384797756",
   downvote: "downvote:1109734067953487902"
 }
+
+export const Admins: string[] = ['926182366853079150']

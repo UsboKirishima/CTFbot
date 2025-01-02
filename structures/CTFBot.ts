@@ -2,18 +2,19 @@ import { Client, ClientOptions, Collection, Colors } from "discord.js";
 //import mongoose from "mongoose";
 import buildEvents from "../handlers/EventHandler";
 import "dotenv/config";
-import { Emotes } from "../config";
+import { Admins, Emotes } from "../config";
 import CTFDatabase from "../database/CTFDatabase";
 
 export default class CTFBot extends Client {
 
     commands: Collection<string, any>;
 
-    db: CTFDatabase;
+    public db: CTFDatabase;
 
     config: {
         colors: typeof Colors
         emotes: typeof Emotes
+        admins: typeof Admins
     }
 
     constructor(options: ClientOptions) {
@@ -22,7 +23,8 @@ export default class CTFBot extends Client {
         this.commands = new Collection()
         this.config = {
             colors: Colors,
-            emotes: Emotes
+            emotes: Emotes,
+            admins: Admins
         }
         this.db = new CTFDatabase();
         buildEvents(this, "../listeners")

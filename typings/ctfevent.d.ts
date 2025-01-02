@@ -1,17 +1,21 @@
-declare interface Partecipant {
+export interface Partecipant {
     id: string;
     solves: Solve[];
+    event: CTFEvent;
 }
 
-declare interface Solve {
-    author: Partecipant; 
+export interface Solve {
+    author: Partecipant;
     name: string;
     flag: string;
     isFirstBlood: boolean;
     time: Date;
+    event: CTFEvent;
 }
 
-declare interface CTFEvent {
+export interface CTFEvent {
+    guildId: string;
     partecipants: Partecipant[];
     solves: Solve[];
+    channelID: string;
 }

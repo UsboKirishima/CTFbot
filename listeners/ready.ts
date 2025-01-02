@@ -12,7 +12,18 @@ export default class InitializeEvent extends BotEvent {
 
   async run(): Promise<void> {
     await build(this.client, "../commands")
-    
-    console.log("Successfully deployed commands and logged in as "+(this.client.user?.tag ?? "an unknown user."))
+
+    this.client.user?.setPresence({
+      status: 'online',
+      activities: [
+        {
+          name: ".help",
+          type: 1,
+          url: 'https://twitch.tv/random'
+        }
+      ]
+    });
+
+    console.log("Successfully deployed commands and logged in as " + (this.client.user?.tag ?? "an unknown user."))
   }
 }

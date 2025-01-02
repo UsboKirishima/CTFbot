@@ -9,7 +9,8 @@
         "outDir": "./dist",
         "rootDir": "./",
         "sourceMap": true,
-        "removeComments": true
+        "removeComments": true,
+        "typeRoots": ["./node_modules/@types", "./typings"]
     },
     "include": [
         "./**/*.ts", "./**/*.d.ts" 
