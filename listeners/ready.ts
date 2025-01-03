@@ -17,7 +17,7 @@ export default class InitializeEvent extends BotEvent {
       status: 'online',
       activities: [
         {
-          name: ".help",
+          name: "CTF Event",
           type: 1,
           url: 'https://twitch.tv/random'
         }

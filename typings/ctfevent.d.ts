@@ -17,5 +17,6 @@ export interface CTFEvent {
     guildId: string;
     partecipants: Partecipant[];
     solves: Solve[];
-    channelID: string;
+    channelId: string;
+    roleId: string;
 }

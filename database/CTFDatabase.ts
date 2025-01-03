@@ -1,5 +1,5 @@
 import { QuickDB, IQuickDBOptions } from "quick.db";
-import type { CTFEvent } from "../typings/ctfevent";
+import type { CTFEvent, Partecipant } from "../typings/ctfevent";
 
 export default class CTFDatabase extends QuickDB {
 
@@ -12,12 +12,29 @@ export default class CTFDatabase extends QuickDB {
 
     public getCTFEventFromGuildId =
         async (guildId: string): Promise<CTFEvent | null> => await this.get(`events.${guildId}`);
-    
+
+    public addUserToCTFEvent = async (guildId: string, partecipant: Partecipant): Promise<CTFEvent | null> => {
+        const event = await this.getCTFEventFromGuildId(guildId);
+        if (!event) {
+            throw new Error(`No CTF Event found for guild ID: ${guildId}`);
+        }
+
+        const isAlreadyAdded = event.partecipants.some(p => p.id === partecipant.id);
+        if (isAlreadyAdded) {
+            throw new Error(`Partecipant with ID: ${partecipant.id} is already in the event.`);
+        }
+
+        event.partecipants.push(partecipant);
+
+        await this.set(`events.${guildId}`, event);
+
+        return event;
+    };
     /**
      * Dangerous function
      * @returns number
      */
-    public eraseAllData = 
+    public eraseAllData =
         async (): Promise<number> => await this.deleteAll();
 
 }
